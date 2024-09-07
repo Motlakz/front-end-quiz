@@ -56,5 +56,5 @@ Further enhance my understanding of core React concepts and implement them via N
 
 ## Author
 
-- Frontend Mentor - [@yourusername](https://www.frontendmentor.io/profile/Motlakz)
-- Twitter - [@yourusername](https://www.twitter.com/MotlalepulaSel6)
+- Frontend Mentor - [@Motlakz](https://www.frontendmentor.io/profile/Motlakz)
+- Twitter - [@MotlalepulaSel6](https://www.twitter.com/MotlalepulaSel6)
