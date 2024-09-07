@@ -36,7 +36,7 @@ Users should be able to:
 
 ### Screenshot
 
-![](./screenshot.jpg)
+![Front End Quiz](C:\Users\User\Downloads\frontend-quiz.png)
 
 ### Links
 
