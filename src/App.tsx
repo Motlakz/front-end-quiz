@@ -28,12 +28,13 @@ function App() {
         <Header currentQuiz={currentQuiz || undefined} />
         <section>
           <Routes>
-            <Route path="/" element={<WelcomePage />} />
+            <Route path="/app" element={<WelcomePage />} />
             <Route path="/html-quiz" element={<HTMLQuiz />} />
             <Route path="/css-quiz" element={<CSSQuiz />} />
             <Route path="/javascript-quiz" element={<JavaScriptQuiz />} />
             <Route path="/accessibility-quiz" element={<AccessibilityQuiz />} />
             <Route path="/results" element={<ResultsPage />} />
+            <Route path="*" element={<div>404 - Not Found</div>} />
           </Routes>
         </section>
       </main>
