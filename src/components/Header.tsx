@@ -42,7 +42,7 @@ const Header: React.FC<HeaderProps> = ({ currentQuiz }) => {
                     <h3 className="text-2xl font-bold dark:text-gray-200">{currentQuiz.label}</h3>
                 </div>
             ) : (
-                <a href="/front-end-quiz/home" className="text-4xl sm:text-2xl dark:text-gray-200 font-semibold">Quiz App</a>
+                <a href="/front-end-quiz/" className="text-4xl sm:text-2xl dark:text-gray-200 font-semibold">Quiz App</a>
             )}
             
             <div className="relative">
