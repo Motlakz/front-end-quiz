@@ -56,7 +56,7 @@ const Header: React.FC<HeaderProps> = ({ currentQuiz }) => {
                 </button>
                 
                 {isOpen && (
-                    <div className="absolute z-20 -left-14 sm:right-0 mt-2 w-48 rounded-md shadow-lg bg-white dark:bg-gray-700 ring-1 ring-black ring-opacity-5">
+                    <div className="absolute z-20 sm:right-0 -right-14 mt-2 w-48 rounded-md shadow-lg bg-white dark:bg-gray-700 ring-1 ring-black ring-opacity-5">
                         <div className="py-1" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
                             <button
                                 onClick={() => handleThemeChange('light')}
