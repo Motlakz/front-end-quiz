@@ -27,9 +27,9 @@ export const AnswerCard = ({ label, index, selected, correct, incorrect, onClick
 
 	return (
 		<motion.div
-			className={`card cursor-pointer group hover:bg-slate-100 dark:hover:bg-slate-500 transition-all transform bg-white dark:bg-gray-800 rounded-xl p-4 flex items-center gap-4 border-2 ${borderColor} ${
-				selected ? 'bg-gray-300 dark:bg-slate-600' : ''
-			}`}
+			className={`card cursor-pointer group transition-all transform rounded-xl p-4 flex items-center gap-4 border-2 ${borderColor} ${
+				selected ? 'bg-gray-300 dark:bg-slate-600' : 'bg-white dark:bg-gray-800'
+			} hover:bg-slate-100 dark:hover:bg-slate-500`}
 			whileHover={{ scale: 1.02 }}
 			whileTap={{ scale: 0.98 }}
 			onClick={onClick}

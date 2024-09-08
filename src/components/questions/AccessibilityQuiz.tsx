@@ -1,13 +1,16 @@
 import { AnswerCard } from "../AnswerCard";
 import ProgressBar from "../ProgressBar";
 import quizData from "./../../data.json";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { useQuiz } from "../../utils";
 import QuizNotFoundPage from "../../pages/QuizNotFoundPage";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { ErrorToast } from "../ToastMessage";
 
 const AccessibilityQuiz = () => {
 	const accessQuiz = quizData.quizzes.find((quiz) => quiz.title === "Accessibility");
+	const [error, setError] = useState<string | null>(null);
+
 	const {
 		selectedAnswer,
 		setSelectedAnswer,
@@ -21,6 +24,15 @@ const AccessibilityQuiz = () => {
 		startTimer,
 		resetTimer,
 	} = useQuiz(accessQuiz || { title: '', icon: '', questions: [] });
+
+	const handleSubmitWithValidation = () => {
+		if (!selectedAnswer) {
+			setError("Please select an answer before submitting.");
+			return;
+		}
+		setError(null);
+		handleSubmit();
+	};
 
 	useEffect(() => {
 		resetTimer();
@@ -51,13 +63,15 @@ const AccessibilityQuiz = () => {
 						onClick={() => setSelectedAnswer(option)}
 					/>
 				))}
+				<AnimatePresence>
+					{error && <ErrorToast message={error} />}
+				</AnimatePresence>
 				{!showResult ? (
 					<motion.button
 						className="bg-purple-600 hover:bg-purple-700 text-white font-bold py-3 px-6 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed"
 						whileHover={{ scale: 1.05 }}
 						whileTap={{ scale: 0.95 }}
-						onClick={handleSubmit}
-						disabled={!selectedAnswer}
+						onClick={handleSubmitWithValidation}
 					>
 						Submit Answer
 					</motion.button>

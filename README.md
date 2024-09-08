@@ -22,7 +22,7 @@ Users should be able to:
 
 - Select a quiz subject
 - Select a single answer from each question from a choice of four
-- See an invisible button with a no-select effect when trying to submit an answer without making a selection
+- See an error when trying to submit an answer without making a selection
 - See if they have made a correct or incorrect choice when they submit an answer
 - Move on to the next question after seeing the question result
 - See a completed state with the score after the final question

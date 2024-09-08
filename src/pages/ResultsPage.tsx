@@ -1,9 +1,10 @@
-import { motion } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { resultQuizCards } from '../utils/quizCards';
 import { useState, useEffect } from 'react';
 import Confetti from 'react-confetti';
 import { playSound } from '../utils/soundEffects';
+import { SuccessToast } from '../components/ToastMessage';
 
 const ResultsPage = () => {
     const location = useLocation();
@@ -11,10 +12,12 @@ const ResultsPage = () => {
     const { score, totalQuestions, quizTitle } = location.state || {};
     const currentQuiz = resultQuizCards[quizTitle as keyof typeof resultQuizCards];
     const [showAnimation, setShowAnimation] = useState(false);
+    const [showSuccessToast, setShowSuccessToast] = useState(true);
 
     useEffect(() => {
         setShowAnimation(true);
-        const timer = setTimeout(() => setShowAnimation(false), 5000);
+        const animationTimer = setTimeout(() => setShowAnimation(false), 5000);
+        const toastTimer = setTimeout(() => setShowSuccessToast(false), 5000);
 
         // Play sound effect
         const percentage = (score / totalQuestions) * 100;
@@ -27,7 +30,8 @@ const ResultsPage = () => {
         }
 
         return () => {
-            clearTimeout(timer);
+            clearTimeout(animationTimer);
+            clearTimeout(toastTimer);
         };
     }, [score, totalQuestions]);
 
@@ -100,15 +104,17 @@ const ResultsPage = () => {
     };
 
     return (
-        <div className="grid md:grid-cols-2 grid-cols-1 gap-10 items-center sm:mx-24 mx-12 relative overflow-hidden">
+        <div className="grid md:grid-cols-2 grid-cols-1 items-center md:mx-12 mx-6 sm:mx-24 overflow-hidden">
+            <AnimatePresence>
+                {showSuccessToast && (
+                    <SuccessToast message="Quiz complete!" />
+                )}
+            </AnimatePresence>
             {showAnimation && getAnimation()}
-            <article>
-                <h1 className="sm:text-5xl text-3xl dark:text-white">Quiz completed!</h1>
-                <h2 className="sm:text-5xl text-3xl mt-4 font-extrabold text-slate-700 dark:text-slate-200">
-                    You scored...
-                </h2>
+            <article className="text-center md:text-left max-w-lg w-full">
+                <h1 className="sm:text-5xl text-2xl dark:text-white">Quiz Completed! <span className="font-extrabold text-slate-700 dark:text-slate-200">You scored...</span></h1>
             </article>
-            <div className="mt-8 bg-white dark:bg-slate-700 sm:p-12 p-8 rounded-2xl shadow-lg text-center">
+            <div className="m-4 box-shadow-lite bg-white dark:bg-slate-700 sm:p-12 p-8 rounded-2xl text-center">
                 <div className="flex items-center border rounded-md p-2 justify-center gap-4 mb-4">
                     <div className={`w-8 h-8 flex items-center justify-center rounded-md bg-${currentQuiz.color}-200 dark:bg-${currentQuiz.color}-700`}>
                         <img 
