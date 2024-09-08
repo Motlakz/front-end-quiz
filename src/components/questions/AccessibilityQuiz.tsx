@@ -32,7 +32,7 @@ const AccessibilityQuiz = () => {
 	}
 
 	return (
-		<div className="grid md:grid-cols-2 grid-cols-1 gap-10 items-center sm:mx-24 mx-12">
+		<div className="grid md:grid-cols-2 grid-cols-1 gap-10 items-center sm:mx-24 md:mx-12 mx-6">
 			<article>
 				<span className="italic text-gray-600 dark:text-gray-300">Question {currentQuestionIndex + 1} of {totalQuestions}</span>
 				<h1 className="sm:text-4xl text-3xl text-gray-800 dark:text-white mt-2 mb-6">{currentQuestion.question}</h1>

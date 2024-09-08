@@ -13,10 +13,10 @@ const WelcomePage = () => {
     const imgStyle = "w-8 h-8";
 
     return (
-        <div className="grid sm:grid-cols-2 grid-cols-1 items-center mx-24">
-            <article>
-                <h1 className="sm:text-5xl dark:text-white">Welcome to the <span className="font-extrabold text-slate-700 dark:text-slate-200">Frontend Quiz!</span></h1>
-                <p className="mt-12 italic">Pick a subject to get started</p>
+        <div className="grid md:grid-cols-2 grid-cols-1 items-center md:mx-12 mx-6 sm:mx-24">
+            <article className="text-center md:text-left max-w-lg w-full">
+                <h1 className="sm:text-5xl text-3xl dark:text-white">Welcome to the <span className="font-extrabold text-slate-700 dark:text-slate-200">Frontend Quiz!</span></h1>
+                <p className="sm:mt-12 my-6 text-lg sm:text-2xl italic">Pick a subject to get started</p>
             </article>
             <div className="cards flex flex-col gap-4">
                 <motion.div

@@ -1,8 +1,9 @@
 import { motion } from 'framer-motion';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { resultQuizCards } from '../utils/quizCards';
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import Confetti from 'react-confetti';
+import { playSound } from '../utils/soundEffects';
 
 const ResultsPage = () => {
     const location = useLocation();
@@ -10,7 +11,6 @@ const ResultsPage = () => {
     const { score, totalQuestions, quizTitle } = location.state || {};
     const currentQuiz = resultQuizCards[quizTitle as keyof typeof resultQuizCards];
     const [showAnimation, setShowAnimation] = useState(false);
-    const audioRef = useRef<HTMLAudioElement | null>(null);
 
     useEffect(() => {
         setShowAnimation(true);
@@ -18,26 +18,16 @@ const ResultsPage = () => {
 
         // Play sound effect
         const percentage = (score / totalQuestions) * 100;
-        let soundFile = '';
         if (percentage >= 70) {
-            soundFile = 'high_score.mp3';
+            playSound('highScore');
         } else if (percentage >= 40 && percentage <= 60) {
-            soundFile = 'medium_score.mp3';
+            playSound('mediumScore');
         } else if (percentage <= 30) {
-            soundFile = 'low_score.mp3';
-        }
-
-        if (soundFile) {
-            audioRef.current = new Audio(`/sounds/${soundFile}`);
-            audioRef.current.play();
+            playSound('lowScore');
         }
 
         return () => {
             clearTimeout(timer);
-            if (audioRef.current) {
-                audioRef.current.pause();
-                audioRef.current = null;
-            }
         };
     }, [score, totalQuestions]);
 

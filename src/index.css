@@ -20,3 +20,29 @@ main {
 :root.dark main {
     background-image: url("./assets/images/pattern-background-desktop-dark.svg");
 }
+
+@media (width <= 860px) {
+    main {
+        background-image: url("./assets/images/pattern-background-tablet-light.svg");
+        background-repeat: no-repeat;
+        background-position: left top;
+    }
+
+    :root.dark main {
+        background-image: url("./assets/images/pattern-background-tablet-dark.svg");
+        background-repeat: no-repeat;
+        background-position: left top;
+    }
+}
+
+@media (width <= 480px) {
+    main {
+        background-image: url("./assets/images/pattern-background-mobile-light.svg");
+        background-repeat: no-repeat;
+    }
+
+    :root.dark main {
+        background-image: url("./assets/images/pattern-background-mobile-dark.svg");
+        background-repeat: no-repeat;
+    }
+}

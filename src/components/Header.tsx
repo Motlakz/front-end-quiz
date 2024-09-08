@@ -29,7 +29,7 @@ const Header: React.FC<HeaderProps> = ({ currentQuiz }) => {
     };
 
     return (
-        <header className="flex justify-between items-center flex-col sm:flex-row gap-8 p-12 sm:mx-12 mx-8">
+        <header className="flex justify-between items-center flex-col sm:flex-row gap-8 py-12 md:mx-12 mx-24">
             {currentQuiz ? (
                 <div className="flex items-center rounded-md p-2 justify-center gap-4">
                     <div className={`w-8 h-8 flex items-center justify-center rounded-md bg-${currentQuiz.color}-100 dark:bg-${currentQuiz.color}-300`}>
