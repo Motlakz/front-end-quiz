@@ -4,6 +4,7 @@ import quizData from "./../../data.json";
 import { motion } from "framer-motion";
 import { useQuiz } from "../../utils";
 import QuizNotFoundPage from "../../pages/QuizNotFoundPage";
+import { useEffect } from "react";
 
 const HTMLQuiz = () => {
 	const htmlQuiz = quizData.quizzes.find((quiz) => quiz.title === "HTML");
@@ -16,7 +17,15 @@ const HTMLQuiz = () => {
 		totalQuestions,
 		handleSubmit,
 		handleNext,
+		timeLeft,
+		startTimer,
+		resetTimer,
 	} = useQuiz(htmlQuiz || { title: '', icon: '', questions: [] });
+
+	useEffect(() => {
+		resetTimer();
+		startTimer();
+	}, [currentQuestionIndex, resetTimer, startTimer]);
 
 	if (!htmlQuiz) {
 		return <QuizNotFoundPage />;
@@ -25,9 +34,10 @@ const HTMLQuiz = () => {
 	return (
 		<div className="grid md:grid-cols-2 grid-cols-1 gap-10 items-center sm:mx-24 mx-12">
 			<article>
-				<span className="italic text-gray-600 dark:text-gray-400">Question {currentQuestionIndex + 1} of {totalQuestions}</span>
+				<span className="italic text-gray-600 dark:text-gray-300">Question {currentQuestionIndex + 1} of {totalQuestions}</span>
 				<h1 className="sm:text-4xl text-3xl text-gray-800 dark:text-white mt-2 mb-6">{currentQuestion.question}</h1>
 				<ProgressBar progress={(currentQuestionIndex + 1) / totalQuestions * 100} />
+				<div className="mt-4 text-2xl font-semibold dark:text-purple-400 text-purple-600">Time left: {timeLeft}s</div>
 			</article>
 			<div className="cards flex flex-col gap-4 mt-8">
 				{currentQuestion.options.map((option, index) => (
@@ -38,19 +48,19 @@ const HTMLQuiz = () => {
 						selected={selectedAnswer === option}
 						correct={showResult && option === currentQuestion.answer}
 						incorrect={showResult && selectedAnswer === option && option !== currentQuestion.answer}
-						onClick={() => !showResult && setSelectedAnswer(option)}
+						onClick={() => setSelectedAnswer(option)}
 					/>
 				))}
 				{!showResult ? (
 					<motion.button
-                        className="bg-purple-600 hover:bg-purple-700 text-white font-bold py-3 px-6 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed"
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.95 }}
-                        onClick={handleSubmit}
-                        disabled={!selectedAnswer}
-                    >
-                        Submit Answer
-                    </motion.button>
+						className="bg-purple-600 hover:bg-purple-700 text-white font-bold py-3 px-6 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed"
+						whileHover={{ scale: 1.05 }}
+						whileTap={{ scale: 0.95 }}
+						onClick={handleSubmit}
+						disabled={!selectedAnswer}
+					>
+						Submit Answer
+					</motion.button>
 				) : (
 					<motion.button
 						className="bg-purple-600 hover:bg-purple-700 text-white font-bold py-3 px-6 rounded-lg"

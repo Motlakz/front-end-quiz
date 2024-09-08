@@ -4,6 +4,7 @@ import quizData from "./../../data.json";
 import { motion } from "framer-motion";
 import { useQuiz } from "../../utils";
 import QuizNotFoundPage from "../../pages/QuizNotFoundPage";
+import { useEffect } from "react";
 
 const JavaScriptQuiz = () => {
     const jsQuiz = quizData.quizzes.find((quiz) => quiz.title === "JavaScript");
@@ -16,18 +17,27 @@ const JavaScriptQuiz = () => {
 		totalQuestions,
 		handleSubmit,
 		handleNext,
+		timeLeft,
+		startTimer,
+		resetTimer,
 	} = useQuiz(jsQuiz || { title: '', icon: '', questions: [] });
+
+	useEffect(() => {
+		resetTimer();
+		startTimer();
+	}, [currentQuestionIndex, resetTimer, startTimer]);
 
     if(!jsQuiz) {
         <QuizNotFoundPage />
     }
 
     return (
-        <div className="grid md:grid-cols-2 grid-cols-1 gap-10 items-center sm:mx-24 mx-12">
+		<div className="grid md:grid-cols-2 grid-cols-1 gap-10 items-center sm:mx-24 mx-12">
 			<article>
-				<span className="italic text-gray-600 dark:text-gray-400">Question {currentQuestionIndex + 1} of {totalQuestions}</span>
+				<span className="italic text-gray-600 dark:text-gray-300">Question {currentQuestionIndex + 1} of {totalQuestions}</span>
 				<h1 className="sm:text-4xl text-3xl text-gray-800 dark:text-white mt-2 mb-6">{currentQuestion.question}</h1>
 				<ProgressBar progress={(currentQuestionIndex + 1) / totalQuestions * 100} />
+				<div className="mt-4 text-2xl font-semibold dark:text-purple-400 text-purple-600">Time left: {timeLeft}s</div>
 			</article>
 			<div className="cards flex flex-col gap-4 mt-8">
 				{currentQuestion.options.map((option, index) => (
@@ -38,7 +48,7 @@ const JavaScriptQuiz = () => {
 						selected={selectedAnswer === option}
 						correct={showResult && option === currentQuestion.answer}
 						incorrect={showResult && selectedAnswer === option && option !== currentQuestion.answer}
-						onClick={() => !showResult && setSelectedAnswer(option)}
+						onClick={() => setSelectedAnswer(option)}
 					/>
 				))}
 				{!showResult ? (
@@ -63,7 +73,7 @@ const JavaScriptQuiz = () => {
 				)}
 			</div>
 		</div>
-    )
+	);
 }
 
 export default JavaScriptQuiz

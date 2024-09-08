@@ -1,12 +1,45 @@
 import { motion } from 'framer-motion';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { resultQuizCards } from '../utils/quizCards';
+import { useState, useEffect, useRef } from 'react';
+import Confetti from 'react-confetti';
 
 const ResultsPage = () => {
     const location = useLocation();
     const navigate = useNavigate();
     const { score, totalQuestions, quizTitle } = location.state || {};
     const currentQuiz = resultQuizCards[quizTitle as keyof typeof resultQuizCards];
+    const [showAnimation, setShowAnimation] = useState(false);
+    const audioRef = useRef<HTMLAudioElement | null>(null);
+
+    useEffect(() => {
+        setShowAnimation(true);
+        const timer = setTimeout(() => setShowAnimation(false), 5000);
+
+        // Play sound effect
+        const percentage = (score / totalQuestions) * 100;
+        let soundFile = '';
+        if (percentage >= 70) {
+            soundFile = 'high_score.mp3';
+        } else if (percentage >= 40 && percentage <= 60) {
+            soundFile = 'medium_score.mp3';
+        } else if (percentage <= 30) {
+            soundFile = 'low_score.mp3';
+        }
+
+        if (soundFile) {
+            audioRef.current = new Audio(`/sounds/${soundFile}`);
+            audioRef.current.play();
+        }
+
+        return () => {
+            clearTimeout(timer);
+            if (audioRef.current) {
+                audioRef.current.pause();
+                audioRef.current = null;
+            }
+        };
+    }, [score, totalQuestions]);
 
     const handleRestartQuiz = () => {
         navigate(currentQuiz.route);
@@ -16,8 +49,69 @@ const ResultsPage = () => {
         navigate('/');
     };
 
+    const getAnimation = () => {
+        const percentage = (score / totalQuestions) * 100;
+        if (percentage >= 70) {
+            return <Confetti recycle={false} numberOfPieces={200} />;
+        } else if (percentage >= 40 && percentage <= 60) {
+            return (
+                <motion.div
+                    className="absolute inset-0 pointer-events-none"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                >
+                    {[...Array(20)].map((_, i) => (
+                        <motion.div
+                            key={i}
+                            className="absolute w-4 h-4 bg-yellow-400 rounded-full"
+                            initial={{ y: -20, x: Math.random() * window.innerWidth }}
+                            animate={{
+                                y: window.innerHeight,
+                                rotate: 360,
+                                transition: { duration: 2, repeat: Infinity, delay: i * 0.1 }
+                            }}
+                        />
+                    ))}
+                </motion.div>
+            );
+        } else if (percentage <= 30) {
+            return (
+                <motion.div
+                    className="absolute inset-0 pointer-events-none"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                >
+                    {[...Array(50)].map((_, i) => (
+                        <motion.div
+                            key={i}
+                            className="absolute w-2 h-2 bg-gray-400 opacity-50"
+                            initial={{ 
+                                y: -20, 
+                                x: Math.random() * window.innerWidth,
+                                rotate: Math.random() * 360 
+                            }}
+                            animate={{
+                                y: window.innerHeight,
+                                rotate: 360,
+                                transition: { 
+                                    duration: 5 + Math.random() * 5, 
+                                    repeat: Infinity, 
+                                    delay: i * 0.1 
+                                }
+                            }}
+                        />
+                    ))}
+                </motion.div>
+            );
+        }
+        return null;
+    };
+
     return (
-        <div className="grid md:grid-cols-2 grid-cols-1 gap-10 items-center sm:mx-24 mx-12">
+        <div className="grid md:grid-cols-2 grid-cols-1 gap-10 items-center sm:mx-24 mx-12 relative overflow-hidden">
+            {showAnimation && getAnimation()}
             <article>
                 <h1 className="sm:text-5xl text-3xl dark:text-white">Quiz completed!</h1>
                 <h2 className="sm:text-5xl text-3xl mt-4 font-extrabold text-slate-700 dark:text-slate-200">

@@ -23,7 +23,7 @@ const Header: React.FC<HeaderProps> = ({ currentQuiz }) => {
     const getThemeIcon = () => {
         switch (theme) {
             case 'light': return <Sun className="text-yellow-500" size={24} />;
-            case 'dark': return <Moon className="text-slate-600" size={24} />;
+            case 'dark': return <Moon className="text-slate-400" size={24} />;
             default: return <Monitor className="text-blue-500" size={24} />;
         }
     };

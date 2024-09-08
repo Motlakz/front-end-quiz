@@ -11,6 +11,7 @@ This is a solution to the [Frontend quiz app challenge on Frontend Mentor](https
 - [My process](#my-process)
   - [Built with](#built-with)
   - [Continued development](#continued-development)
+  - [Acknowledgements](#acknowledgements)
 - [Author](#author)
 
 ## Overview
@@ -53,6 +54,14 @@ Users should be able to:
 ### Continued development
 
 Further enhance my understanding of core React concepts and implement them via NextJS.
+
+### Acknowledgements
+
+- Medium Score Sounds - [Pixabay](https://pixabay.com/users/universfield-28281460/?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=152480)
+- High Score Sounds - [Pixabay](https://pixabay.com/?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=6185)
+- Low Score Sounds - [Pixabay](https://pixabay.com/users/u_8g40a9z0la-45586904/?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=234710)
+- Button Submit - [UniversField](https://pixabay.com/users/universfield-28281460/?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=124467)
+- Select Sound - [Pixabay](https://pixabay.com/users/u_2fbuaev0zn-30247713/?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=121244)
 
 ## Author
 
