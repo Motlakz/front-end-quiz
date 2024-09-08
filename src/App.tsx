@@ -9,6 +9,7 @@ import { ThemeProvider } from './context/ThemeContext';
 import ResultsPage from './pages/ResultsPage';
 import { useState, useEffect } from 'react';
 import { quizCards } from './utils/quizCards';
+import NotFoundPage from './pages/404-not-found';
 
 type QuizInfo = { icon: string; label: string; color: string };
 
@@ -28,13 +29,13 @@ function App() {
         <Header currentQuiz={currentQuiz || undefined} />
         <section>
           <Routes>
-            <Route path="/app" element={<WelcomePage />} />
+            <Route path="/" element={<WelcomePage />} />
             <Route path="/html-quiz" element={<HTMLQuiz />} />
             <Route path="/css-quiz" element={<CSSQuiz />} />
             <Route path="/javascript-quiz" element={<JavaScriptQuiz />} />
             <Route path="/accessibility-quiz" element={<AccessibilityQuiz />} />
             <Route path="/results" element={<ResultsPage />} />
-            <Route path="*" element={<div>404 - Not Found</div>} />
+            <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </section>
       </main>
