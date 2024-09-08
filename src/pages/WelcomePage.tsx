@@ -8,12 +8,9 @@ import access from './../assets/images/icon-accessibility.svg'
 const WelcomePage = () => {
     const navigate = useNavigate();
 
-    const quizCards = [
-        { icon: html, label: 'HTML', color: 'orange', route: '/html-quiz' },
-        { icon: css, label: 'CSS', color: 'green', route: '/css-quiz' },
-        { icon: javascript, label: 'JavaScript', color: 'indigo', route: '/javascript-quiz' },
-        { icon: access, label: 'Accessibility', color: 'purple', route: '/accessibility-quiz' },
-    ];
+    const cardStyle = "card cursor-pointer group bg-white dark:bg-slate-600 hover:scale-105 box-shadow-lite rounded-lg p-3 flex items-center gap-3";
+    const iconStyle = "w-12 h-12 flex items-center justify-center rounded-md transition-all duration-300";
+    const imgStyle = "w-8 h-8";
 
     return (
         <div className="grid sm:grid-cols-2 grid-cols-1 items-center mx-24">
@@ -22,35 +19,73 @@ const WelcomePage = () => {
                 <p className="mt-12 italic">Pick a subject to get started</p>
             </article>
             <div className="cards flex flex-col gap-4">
-                {quizCards.map((card, index) => (
-                    <motion.div
-                        key={card.label}
-                        className={`card cursor-pointer group bg-white dark:bg-slate-600 hover:scale-105 box-shadow-lite rounded-lg p-3 flex items-center gap-3`}
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.95 }}
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.3, delay: index * 0.1 }}
-                        onClick={() => navigate(card.route)}
-                    >
-                        <div className={`w-12 h-12 flex items-center justify-center rounded-md transition-all duration-300 bg-${card.color}-200 group-hover:bg-${card.color}-100 dark:bg-${card.color}-700 dark:group-hover:bg-${card.color}-600`}>
-                            <img 
-                                src={card.icon} 
-                                className="w-8 h-8"
-                                alt={`${card.label} icon`} 
-                            />
-                        </div>
-                        <figcaption 
-                            className={`font-bold transition-colors duration-300 
-                                ${card.color === 'indigo' 
-                                    ? 'text-indigo-600 dark:text-indigo-300 group-hover:text-indigo-700 dark:group-hover:text-indigo-200' 
-                                    : `text-${card.color}-600 dark:text-${card.color}-400 group-hover:text-${card.color}-700 dark:group-hover:text-${card.color}-300`
-                                }`}
-                        >
-                            {card.label}
-                        </figcaption>
-                    </motion.div>
-                ))}
+                <motion.div
+                    className={cardStyle}
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.3 }}
+                    onClick={() => navigate('/html-quiz')}
+                >
+                    <div className={`${iconStyle} bg-orange-100 group-hover:bg-orange-200`}>
+                        <img src={html} className={imgStyle} alt="HTML icon" />
+                    </div>
+                    <figcaption className="font-bold transition-colors duration-300 text-orange-600 dark:text-orange-300 group-hover:text-orange-700 dark:group-hover:text-orange-200">
+                        HTML
+                    </figcaption>
+                </motion.div>
+
+                <motion.div
+                    className={cardStyle}
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.3, delay: 0.1 }}
+                    onClick={() => navigate('/css-quiz')}
+                >
+                    <div className={`${iconStyle} bg-green-100 group-hover:bg-green-200`}>
+                        <img src={css} className={imgStyle} alt="CSS icon" />
+                    </div>
+                    <figcaption className="font-bold transition-colors duration-300 text-green-600 dark:text-green-300 group-hover:text-green-700 dark:group-hover:text-green-200">
+                        CSS
+                    </figcaption>
+                </motion.div>
+
+                <motion.div
+                    className={cardStyle}
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.3, delay: 0.2 }}
+                    onClick={() => navigate('/javascript-quiz')}
+                >
+                    <div className={`${iconStyle} bg-indigo-100 group-hover:bg-indigo-200`}>
+                        <img src={javascript} className={imgStyle} alt="JavaScript icon" />
+                    </div>
+                    <figcaption className="font-bold transition-colors duration-300 text-indigo-600 dark:text-indigo-300 group-hover:text-indigo-700 dark:group-hover:text-indigo-200">
+                        JavaScript
+                    </figcaption>
+                </motion.div>
+
+                <motion.div
+                    className={cardStyle}
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.3, delay: 0.3 }}
+                    onClick={() => navigate('/accessibility-quiz')}
+                >
+                    <div className={`${iconStyle} bg-purple-100 group-hover:bg-purple-200`}>
+                        <img src={access} className={imgStyle} alt="Accessibility icon" />
+                    </div>
+                    <figcaption className="font-bold transition-colors duration-300 text-purple-600 dark:text-purple-300 group-hover:text-purple-700 dark:group-hover:text-purple-200">
+                        Accessibility
+                    </figcaption>
+                </motion.div>
             </div>
         </div>
     )

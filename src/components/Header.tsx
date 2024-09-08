@@ -32,7 +32,7 @@ const Header: React.FC<HeaderProps> = ({ currentQuiz }) => {
         <header className="flex justify-between items-center flex-col sm:flex-row gap-8 p-12 sm:mx-12 mx-8">
             {currentQuiz ? (
                 <div className="flex items-center rounded-md p-2 justify-center gap-4">
-                    <div className={`w-8 h-8 flex items-center justify-center rounded-md bg-${currentQuiz.color}-200 dark:bg-${currentQuiz.color}-700`}>
+                    <div className={`w-8 h-8 flex items-center justify-center rounded-md bg-${currentQuiz.color}-100 dark:bg-${currentQuiz.color}-300`}>
                         <img 
                             src={currentQuiz.icon} 
                             className="w-6 h-6"
@@ -42,7 +42,7 @@ const Header: React.FC<HeaderProps> = ({ currentQuiz }) => {
                     <h3 className="text-2xl font-bold dark:text-gray-200">{currentQuiz.label}</h3>
                 </div>
             ) : (
-                <a href="/home" className="text-4xl sm:text-2xl dark:text-gray-200 font-semibold">Quiz App</a>
+                <a href="/front-end-quiz/home" className="text-4xl sm:text-2xl dark:text-gray-200 font-semibold">Quiz App</a>
             )}
             
             <div className="relative">

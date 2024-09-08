@@ -25,7 +25,7 @@ function App() {
 
   return (
     <ThemeProvider>
-      <main className="light min-h-screen pb-10 dark:bg-slate-800 dark:text-gray-200">
+      <main className="min-h-screen pb-10 dark:bg-slate-800 dark:text-gray-200">
         <Header currentQuiz={currentQuiz || undefined} />
         <section>
           <Routes>
